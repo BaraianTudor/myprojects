@@ -23,10 +23,15 @@ public class SearchController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getSearch(Model model, @RequestParam(name = "page", defaultValue = "0") int pageNumber,
-			@RequestParam(name = "search") String search) {
+			@RequestParam(name = "search") String search, @RequestParam(name = "primarycat") String primarycat) {
 
-		Page<Advertisement> searchResult = advertisementService.getAdByStringTitleOrBody(search, pageNumber);
+		Page<Advertisement> searchResult;
 
+		if (primarycat.equals("0")) {
+			searchResult = advertisementService.getAdByStringTitleOrBodyAndActiveTrue(search, search, pageNumber);
+		} else {
+			searchResult = advertisementService.getAdByStringTitleOrBodyAndActiveTrue(primarycat, search, pageNumber);
+		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
 

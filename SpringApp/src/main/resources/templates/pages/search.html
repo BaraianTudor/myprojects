@@ -22,17 +22,18 @@
 			</button>
 			<div class="collapse navbar-collapse justify-content-center"
 				id="navbarTogglerDemo01">
-
-				<select id="primary" class="custom-select">
+			<form action="/search" method="get">
+				<select id="primarycat" class="custom-select" name="primarycat">
 					<option selected="selected" value="0">Select main category</option>
-					<option th:each="primaryCat : ${primaryCat}"
-						th:text="${primaryCat.getName()}" th:value="${primaryCat}"></option>
+					<option th:each="primaryCat : ${primaryCat}" name="primarycat"
+						th:text="${primaryCat.getName()}" th:value="${primaryCat.getName()}"></option>
 				</select> 
 
-				<form class="form-inline my-2 my-lg-0" action="/search" method="get">
+				<th:block class="form-inline my-2 my-lg-0" >
 					<input class="form-control mr-sm-2" type="text"
 						placeholder="Search" name="search"></input>
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</th:block>
 				</form>
 			</div>
 		</nav>

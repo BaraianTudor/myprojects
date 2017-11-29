@@ -40,11 +40,11 @@ public class AdvertisementService {
 		return result;
 	}
 
-	public Page<Advertisement> getAdByStringTitleOrBody(String string, int pageNumber) {
+	public Page<Advertisement> getAdByStringTitleOrBodyAndActiveTrue(String primarycat, String string, int pageNumber) {
 
 		PageRequest request = new PageRequest(pageNumber, PAGESIZE, Sort.Direction.DESC, "id");
 
-		return advertisementDAO.findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(string, string, request);
+		return advertisementDAO.findByActiveTrueAndAdTypeContainingIgnoreCaseAndTitleContainingIgnoreCaseOrActiveTrueAndAdTypeContainingIgnoreCaseAndBodyContainingIgnoreCase(primarycat, string, primarycat, string, request);
 	}
 
 	public Advertisement findAdvertisementById(Long id) {
@@ -81,7 +81,7 @@ public class AdvertisementService {
 			saveAdvertismentEntity(advertisement);
 		}
 	}
-	
+
 	public void activateAd(Advertisement advertisement) {
 		if (!advertisement.isActive()) {
 			advertisement.setActive(true);
