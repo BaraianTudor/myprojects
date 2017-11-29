@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div th:fragment="admin" class="container">
+		<form class="row" method="post" th:action="@{/admin}">
+
+			<div class="row" style="padding-top: 2cm;">
+
+				<table>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Active</th>
+						<th>Select</th>
+					</tr>
+					<tr th:each="userList : ${userList}">
+						<th th:text="${userList.id}"></th>
+						<th th:text="${userList.firstName} + ' ' + ${userList.lastName}"></th>
+						<th th:text="${userList.email}"></th>
+						<th th:text="${userList.active}"></th>
+						<th><input type="checkbox" name="userIDs" th:value="${userList.id}"></input></th>
+					</tr>
+				</table>
+
+			</div>
+			<button type="submit" name="action" value="Activate" class="btn btn-primary btn-lg btn-block ">Activate</button>
+			<button type="submit" name="action" value="Deactivate" class="btn btn-primary btn-lg btn-block ">Deactivate</button>
+		</form>
+	</div>
+
+
+	<script th:fragment="js" src="js/check.js" rel="stylesheet"></script>
+
+</body>
+</html>

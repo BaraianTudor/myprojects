@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+	<div class="col-12 col-sm-12 col-md-9 col-lg-10"
+		th:fragment="readmessage">
+
+		<form method="get" th:object="${message}" th:action="@{/readmessage}">
+		
+			<div class="form-group row" >
+				<label class="col-sm-2 col-form-label">From</label>
+				<div class="col-sm-10">
+					<p class="form-control-static" th:text="${fromEmail}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label  class="col-sm-2 col-form-label">Subject</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" th:field="*{messageTitle}" readonly=""></input>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label  class="col-sm-2 col-form-label">Message</label>
+				<div class="col-sm-10">
+					<textarea rows="8" type="text" class="form-control" th:field="*{messageBody}" readonly=""></textarea>
+				</div>
+			</div>
+			<a type="submit" class="btn btn-success float-right" th:href="@{'/reply?id=' + ${message	.id}}">Reply</a>
+		</form>
+
+	</div>
+
+
+</body>
+</html>

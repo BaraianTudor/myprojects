@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/table.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div class="container" th:fragment="user">
+		<div class="row justify-content-center">
+			<div class="col-10 col-md-5">
+				<div class="row justify-content-center">
+					<a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin" class="btn btn-primary btn-lg btn-block ">Admin menu</a>
+					<a href="/editaddress" class="btn btn-primary btn-lg btn-block ">Edit address</a>
+					 <a href="/edituser" type="button" class="btn btn-secondary btn-lg btn-block">User info</a>
+				</div>
+
+				<div th:replace="@{'pages/user/' + ${element}} :: ${element}"></div>
+
+			</div>
+		</div>
+		<script th:fragment="js" src="js/check.js" rel="stylesheet"></script>
+	</div>
+</body>
+</html>

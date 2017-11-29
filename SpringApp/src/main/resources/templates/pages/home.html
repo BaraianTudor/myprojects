@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/login.css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+
+	<div class="container" th:fragment="home">
+
+		<div class="row row-offcanvas row-offcanvas-right ">
+
+			<div class="col-12 col-md-9 " style="background-color: White;">
+
+				<div class="jumbotron">
+					<h1>Welcome to Virtual Market</h1>
+					<p>This is just a demo version of a Spring Application </p>
+				</div>
+		
+
+				<div class="row">
+
+					<div th:each="result : ${result}" class="col-6 col-lg-4">
+						<h2 th:text="${#strings.abbreviate(result.title,12)}"></h2>
+						<p th:text="${#strings.abbreviate(result.body,200)}"></p>
+						<p>
+							<a class="btn btn-secondary" th:href="@{'/showad?id=' + ${result.id}}" role="button">View
+								details &raquo;</a>
+						</p>
+					</div>
+
+				</div>
+				<!--/row-->
+			</div>
+			<!--/span-->
+
+			<!--/span-->
+		</div>
+		<!--/row-->
+
+		<hr>
+
+		<footer>
+			<p>&copy; Baraian Tudor Calin 2017</p>
+		</footer>
+		</hr>
+
+	</div>
+
+</body>
+</html>

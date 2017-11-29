@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html xmlns:sd="http://www.thymeleaf.org/spring-data"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="utf-8"></meta>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+<link rel="icon" href="../../favicon.ico"></link>
+
+
+<title>Virtual Market</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet"></link>
+
+<!-- Custom styles for this template -->
+<link href="css/offcanvas.css" rel="stylesheet"></link>
+<link href="css/login.css" rel="stylesheet"></link>
+
+
+<!-- message bs -->
+ 
+<!-- Custom styles for loading page template -->
+<link th:replace="@{'pages/' + ${template}} :: css"></link>
+
+<script src="https://use.fontawesome.com/6bac765786.js"></script>
+
+
+</head>
+
+<body>
+
+	<div th:replace="elements/header :: header"></div>
+	<div th:replace="@{'pages/' + ${template}} :: ${template}"></div>
+
+	
+	
+
+
+	<!--/.container-->
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+		integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+		crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/offcanvas.js"></script>
+	<script src="js/select.cat.js"></script>
+	
+	
+	
+	<!-- Custom JS for loading page -->
+	<script th:replace="@{'pages/' + ${template}} :: js"></script>
+</body>
+</html>

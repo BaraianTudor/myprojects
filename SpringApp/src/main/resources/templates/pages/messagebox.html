@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/sidemenu.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+	<div th:fragment="messagebox">
+
+
+		<div class="container" style="top: 100px">
+
+			<div class="row">
+				<!-- First row -->
+				<div class="col-12 col-sm-12 col-md-3 col-lg-2">
+					<!-- Left column (First row) -->
+					<a href="#" class="btn btn-danger btn-primary btn-block"> <i
+						class="fa fa-edit"></i> Compose
+					</a>
+				</div>
+
+				<!-- END: Right column -->
+
+			</div>
+			<!-- END: first row -->
+			<hr>
+			<div class="row">
+				<!-- Sencond row -->
+				<div class="col-12 col-sm-12 col-md-3 col-lg-2">
+					<!-- LEFT COLUMN Menu (Sencond row) -->
+					<ul class="list-group">
+						<!-- Menu -->
+
+						<a class="list-group-item justify-content-between"
+							th:classappend="${box} == 'inbox' ? active : ''"
+							href="/messagebox?box=inbox"> Inbox <span
+							class="badge badge-default badge-pill" th:text="${boxInfo}"></span>
+						</a>
+						<a class="list-group-item justify-content-between"
+							th:classappend="${box} == 'important' ? active : ''"
+							href="/messagebox?box=important"> Important <span
+							class="badge badge-default badge-pill" th:text="${boxInfo}"></span>
+						</a>
+						<a class="list-group-item justify-content-between"
+							th:classappend="${box} == 'outbox' ? active : ''"
+							href="/messagebox?box=outbox">Sent </a>
+						<a class="list-group-item justify-content-between"
+							th:classappend="${box} == 'trash' ? active : ''"
+							href="/messagebox?box=trash">Trash </a>
+					</ul>
+					<!-- End left menu -->
+				</div>
+				<!-- END: Left column (Second row) -->
+
+				<div th:replace="@{'pages/message/' + ${element}} :: ${element}"></div>
+
+			</div>
+			</hr>
+
+			<!-- END: Second row -->
+		</div>
+		<!-- END: container -->
+	</div>
+
+</body>
+</html>

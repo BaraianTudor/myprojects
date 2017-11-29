@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+	<!-- Login Form -->
+	<div class="container" th:fragment="advertisement">
+		<div class="row justify-content-center">	
+			<div class="col-10 col-md-5">
+		
+		<th:block th:switch="${page}">
+ 			 <div th:case="'auto'">
+    		 <h1>Automobile</h1>
+ 			 </div>
+ 			 <div th:case="'electronics'">
+   		  	<h1>Electronics</h1>
+ 			 </div>
+ 			 <div th:case="'job'">
+   		  	<h1>Job</h1>
+   		  	</div>
+   		  	<div th:case="'property'">
+   		  	<h1>Property</h1>
+   		  	</div>
+   		  	<div th:case="'business'">
+   		  	<h1>Business</h1>
+   		  	</div>
+   		  	<div th:case="'fashion'">
+   		  	<h1>Fashion</h1>
+   		  	</div>
+   		  	<div th:case="'gardening'">
+   		  	<h1>Gardening</h1>
+   		  	</div>
+   		  	<div th:case="'industry'">
+   		  	<h1>Industry</h1>
+   		  	</div>
+   		  	<div th:case="'pet'">
+   		  	<h1>Pets</h1>
+   		  	</div>
+   		  	<div th:case="'sport'">
+   		  	<h1>Sports</h1>
+ 			 </div>
+		</th:block>	
+		
+		
+		
+		
+		<form method="post" th:action="@{/new}" th:object="${advertisement}" enctype="multipart/form-data">
+		<input type="hidden" name="page" th:value="${page}" />
+			<label>Title</label>
+			<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red; font-size:90%;">Name Error</div>
+			<input class="input" type="text"  name="u" placeholder="Title" required="required" th:field="*{title}"/> 
+			
+			<label>Category</label>
+			<div th:if="${#fields.hasErrors('subCategory')}" th:errors="*{subCategory}" style="color:red; font-size:90%;">Name Error</div>
+			<select class="custom-select input" th:field="*{subCategory}">
+  				<option selected="selected" value="0">Select category</option>
+  				<option th:each="subCategory : ${subCategory}" th:text="${subCategory.getName()}" th:value="${subCategory}"></option>
+ 			</select>
+ 			
+ 			<div th:if="${page} == 'electronics' or ${page} == 'fashion' or ${page} == 'gardening'">
+ 			
+ 			<label>Condition</label>
+ 			<div th:if="${#fields.hasErrors('prodState')}" th:errors="*{prodState}" style="color:red; font-size:90%;">Name Error</div>
+			<select class="custom-select input" th:field="*{prodState}">
+  				<option selected="selected" value="0">Select category</option>
+  				<option th:each="prodState : ${prodState}" th:text="${prodState.getName()}" th:value="${prodState}"></option>
+ 			</select>
+ 			
+ 			</div>
+			
+			<div th:if="${page} == 'auto' ">
+			
+			<label>Brand</label>
+			<div th:if="${#fields.hasErrors('autoBrand')}" th:errors="*{autoBrand}" style="color:red; font-size:90%;">Name Error</div>
+			<select class="custom-select input" th:field="*{autoBrand}">
+  				<option selected="selected" value="0">Brand (select)</option>
+  				<option th:each="autoBrand : ${autoBrand}" th:text="${autoBrand.getName()}" th:value="${autoBrand}"></option>
+ 			</select>
+ 			 			
+ 			<label>Model</label>
+ 			<div th:if="${#fields.hasErrors('model')}" th:errors="*{model}" style="color:red; font-size:90%;">Name Error</div>
+ 			<input class="input" type="text" name="u" placeholder="Model" required="required" th:field="*{model}"/> 
+ 			
+ 			</div>
+ 			
+ 			<div th:if="${page} == 'job' ">
+			
+			<label>Job type</label>
+			<div th:if="${#fields.hasErrors('jobType')}" th:errors="*{jobType}" style="color:red; font-size:90%;">Name Error</div>
+			<select class="custom-select input" th:field="*{jobType}">
+  				<option selected="selected" value="0">Job (select)</option>
+  				<option th:each="jobType : ${jobType}" th:text="${jobType.getName()}" th:value="${jobType}"></option>
+ 			</select>
+ 			 	 			 			
+ 			</div>
+ 			
+ 			<div th:if="${page} == 'fashion'">
+ 			
+ 			<label>Brand</label>
+ 			<div th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" style="color:red; font-size:90%;">Name Error</div>
+ 			<input class="input" type="text" name="u" placeholder="Brand" required="required" th:field="*{brand}"/> 
+ 			
+ 			</div>
+ 			
+ 			<div th:if="${page} == 'fashion' or ${page} == 'property'">
+ 			
+ 			<label>Size</label>
+ 			<div th:if="${#fields.hasErrors('size')}" th:errors="*{size}" style="color:red; font-size:90%;">Name Error</div>
+ 			<input class="input" type="number" name="u" placeholder="Size" required="required" th:field="*{size}"/>
+ 			
+ 			</div>
+ 			
+ 			<div th:if="${page} == 'auto' or ${page} == 'property'">
+ 			
+ 			<label>Buid Year</label>
+ 			<div th:if="${#fields.hasErrors('buildYear')}" th:errors="*{buildYear}" style="color:red; font-size:90%;">Name Error</div>
+ 			<input class="input" type="number" name="u" placeholder="ex : 2000" required="required" th:field="*{buildYear}"/> 
+ 			
+ 			</div>
+ 			
+ 			<div th:if="${page} == 'auto' ">
+ 			
+ 			<label>Fuel type</label>
+ 			<div th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}" style="color:red; font-size:90%;">Name Error</div>
+ 			<select class="custom-select input" th:field="*{fuelType}">
+  				<option selected="selected" value="0">Fuel Type (select)</option>
+  				<option th:each="fuelType : ${fuelType}" th:text="${fuelType.getName()}" th:value="${fuelType}"></option>
+ 			</select>
+ 			
+ 			<label>Km</label>
+ 			<div th:if="${#fields.hasErrors('rulaj')}" th:errors="*{rulaj}" style="color:red; font-size:90%;">Name Error</div>
+ 			<input class="input" type="number" name="u" placeholder="Rulaj" required="required" th:field="*{rulaj}"/> 
+ 			
+ 			</div>
+ 			
+ 			
+ 			<div th:if="${page} == 'auto' or ${page} == 'fashion'">
+ 			
+ 			<label>Color</label>
+ 			<div th:if="${#fields.hasErrors('color')}" th:errors="*{color}" style="color:red; font-size:90%;">Name Error</div>
+ 			<select class="custom-select input" th:field="*{color}">
+  				<option selected="selected" value="0">Color (select)</option>
+  				<option th:each="color : ${color}" th:text="${color.getName()}" th:value="${color}"></option>
+ 			</select>
+ 			
+ 			</div>
+ 			
+ 			<label>Description</label>
+ 			<div th:if="${#fields.hasErrors('body')}" th:errors="*{body}" style="color:red; font-size:90%;">Name Error</div>
+			<textarea rows="3" class="input" type="text" name="u" placeholder="Description" required="required" th:field="*{body}"></textarea> 
+			
+			<div class="row">
+  			<div class="col-8">
+  			<label>Price</label>
+  			<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color:red; font-size:90%;">Name Error</div>
+			<input class="input" type="number" name="u" placeholder="Price" required="required" th:field="*{price}"/> 
+			</div>
+			<div class="col-4">
+			<label>Curency</label>
+			<div th:if="${#fields.hasErrors('courency')}" th:errors="*{courency}" style="color:red; font-size:90%;">Name Error</div>
+			<select class="custom-select input" th:field="*{courency}">
+  				<option selected="selected" value="0">Courency (select)</option>
+  				<option th:each="courency : ${courency}" th:text="${courency.getName()}" th:value="${courency}"></option>
+ 			</select>
+ 			</div>
+			</div>
+			<label class="custom-file input">
+				<input type="file" id="file" class="custom-file-input" accept="image/*" name="file"></input>
+				<span class="custom-file-control"></span>
+			</label>
+						
+			<button type="submit" class="btn btn-primary btn-block btn-large">Finish</button>
+			
+		</form>
+		</div>
+	</div>
+	<hr>
+
+		<footer>
+			<p>&copy; Baraian Tudor Calin 2017</p>
+		</footer>
+		</hr>
+</div>
+	<script th:fragment="js" src="js/check.js" rel="stylesheet"></script>
+
+</body>
+</html>

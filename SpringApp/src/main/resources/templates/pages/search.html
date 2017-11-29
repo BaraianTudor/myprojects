@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/login.css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+
+	<div class="container" th:fragment="search">
+
+
+		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarTogglerDemo01"
+				aria-controls="navbarTogglerDemo01" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center"
+				id="navbarTogglerDemo01">
+
+				<select id="primary" class="custom-select">
+					<option selected="selected" value="0">Select main category</option>
+					<option th:each="primaryCat : ${primaryCat}"
+						th:text="${primaryCat.getName()}" th:value="${primaryCat}"></option>
+				</select> 
+
+				<form class="form-inline my-2 my-lg-0" action="/search" method="get">
+					<input class="form-control mr-sm-2" type="text"
+						placeholder="Search" name="search"></input>
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+
+		<hgroup class="mb20">
+			<h1>Search Results</h1>
+		</hgroup>
+		<!--	<a id="myAnchor">A Link: Go to w3schools.com</a> -->
+
+		<nav aria-label="..." th:if="${searchResult.totalElements} > 0">
+			<ul class="pagination pagination-lg ">
+				<li class="page-item"
+					th:classappend="${pageNumber} == 0 ? disabled : ''"><a
+					class="page-link"
+					th:href="@{'/search?search=' + ${search} + '&amp;page=' + ${searchResult.number - 1} }"
+					tabindex="-1">Previous</a></li>
+				<li
+					th:each="i: ${#numbers.sequence(0, searchResult.totalPages - 1)}"
+					class="page-item"
+					th:classappend="${searchResult.number} == ${i}?  active : ''"><a
+					class="page-link"
+					th:href="@{'/search?search=' + ${search} + '&amp;page=' + ${i} }" th:text="${i} + 1">1</a></li>
+
+				<li class="page-item"
+					th:classappend="${pageNumber} == ${searchResult.totalPages} - 1? disabled : ''"><a
+					class="page-link"
+					th:href="@{'/search?search=' + ${search} + '&amp;page=' + ${searchResult.number + 1} }">Next</a></li>
+			</ul>
+		</nav>
+		
+		<span th:each="searchResult : ${searchResult}">
+		<div class="row input">
+		
+		<div class="col-lg-3 hidden-md-down">
+			<img th:src="${searchResult.picturePath} ? ${#strings.substringAfter(#strings.replace(searchResult.picturePath,'\','/'), 'static')} : '/images/no-thumb.jpg'" width="auto" height="150px" ></img>
+		</div>
+		
+		<div class="col-lg-2">
+		
+			<ul class="meta-search">
+				<li><i class="glyphicon glyphicon-calendar" th:text="${#dates.format(searchResult.creationTime, 'dd-MMM-yyyy')}"></i></li>
+				<li><i class="glyphicon glyphicon-time" th:text="${searchResult.adType}"></i></li>
+				<li><i class="glyphicon glyphicon-tags" th:text="${searchResult.price}"></i><i class="glyphicon glyphicon-tags" th:text="' - ' + ${searchResult.courency}"></i></li>
+			</ul>
+			
+		</div>
+		
+		<div class="col-lg-6 col-12">
+			<h3>
+				<a th:href="@{'/showad?id=' + ${searchResult.id}}" title="" th:text="${searchResult.title}"></a>
+			</h3>
+			<p th:text="${searchResult.body}"></p>
+				
+		
+		</div>
+		
+		</div>
+		
+		<div class="row float-right">
+		
+			<th:block th:switch="${searchResult.owner.email}">
+				<div class="float-right">
+					<a th:case="${loggedUser}"> <a th:href="@{'/editad?id=' + ${searchResult.id}}" class="btn btn-danger ">edit</a> | <a class="btn text-danger" th:href="@{'/deletead?id=' + ${searchResult.id}}">delete</a></a> 
+					<a class="btn btn-danger " th:case="*" th:href="@{'/compose?id=' + ${searchResult.id}}">Send Message</a>
+				</div>
+			</th:block>
+		
+		
+		</div>
+		
+		
+		</span>
+
+
+	</div>
+</body>
+</html>

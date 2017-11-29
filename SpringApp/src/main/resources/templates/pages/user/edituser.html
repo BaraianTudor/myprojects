@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div th:fragment="edituser" class="container">
+		<div class="row" style="padding-top: 2cm;">
+
+			<form method="post" th:action="@{/register}" th:object="${siteUser}">
+
+				<input class="input" type="text" name="u"
+					th:placeholder="'Email address: ' + ${siteUser.email}"
+					required="required" readonly="true" /> <input class="input"
+					type="text" name="u"
+					th:placeholder="'First name: ' + ${siteUser.firstName}"
+					required="required" readonly="true" /> <input class="input"
+					type="text" name="u"
+					th:placeholder="'Last name: ' + ${siteUser.lastName}"
+					required="required" readonly="true" /> <input class="input"
+					type="text" name="u"
+					th:placeholder="'City: ' + ${siteUser.address.city.getName()}"
+					required="required" readonly="true" />
+
+			</form>
+
+		</div>
+
+		<script th:fragment="js" src="js/check.js" rel="stylesheet"></script>
+	</div>
+</body>
+</html>

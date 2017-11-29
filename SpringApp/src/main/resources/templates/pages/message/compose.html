@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+	<div class="col-12 col-sm-12 col-md-9 col-lg-10"
+		th:fragment="compose">
+
+		<form method="post" th:object="${message}" th:action="@{/compose}">
+			<input type="hidden" th:field="*{sender}"></input> <input
+				type="hidden" th:field="*{reciver}"></input>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">To</label>
+				<div class="col-sm-10">
+					<p class="form-control-static" th:text="${toEmail}"></p>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Subject</label>
+				<div class="col-sm-10">
+					<div th:if="${#fields.hasErrors('messageTitle')}"
+						th:errors="*{messageTitle}" style="color: red; font-size: 90%;"></div>
+					<input type="text" class="form-control" placeholder="Subject"
+						th:field="*{messageTitle}"></input>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Message</label>
+				<div class="col-sm-10">
+					<div th:if="${#fields.hasErrors('messageBody')}"
+						th:errors="*{messageBody}" style="color: red; font-size: 90%;"></div>
+					<textarea rows="8" type="text" class="form-control"
+						placeholder="Message" th:field="*{messageBody}"></textarea>
+				</div>
+			</div>
+			<button type="submit" name="action" value="Send"
+				class="btn btn-success float-right">Send</button>
+		</form>
+
+	</div>
+
+
+</body>
+</html>

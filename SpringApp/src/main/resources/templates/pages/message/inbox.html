@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+	<div class="col-12 col-sm-12 col-md-9 col-lg-10" th:fragment="inbox">
+		<form method="get" th:action="@{/messageMove}">
+		<input type="hidden" name="box" th:value="${box}"/>
+			<!-- Tabs -->
+
+			<!-- END: Tabs -->
+			<div class="col-12 col-sm-12 col-md-9 col-lg-10">
+				<div class="btn-group" role="group"
+					aria-label="Button group with nested dropdown">
+					<button th:if="${box == 'trash'}" type="submit" class="btn btn-secondary" name="action"
+						value="Restore">
+						&nbsp;<i class="fa fa-reply-all" aria-hidden="true"></i>&nbsp;
+					</button>
+					<button type="submit" class="btn btn-secondary" name="action"
+						value="Delete">
+						&nbsp;<i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;
+					</button>
+					<button type="submit" class="btn btn-secondary" name="action"
+						value="Important">
+						&nbsp;<i class="fa fa-star" aria-hidden="true"></i>&nbsp;
+					</button>
+				</div>
+
+
+				<!-- Right side buttons -->
+
+				<!-- END: Right side buttons -->
+			</div>
+			<div class="list-group">
+
+				<li
+					class="list-group-item d-flex justify-content-start hidden-md-down">
+
+					<div class="checkbox">
+						<input type="checkbox"></input>
+					</div> &nbsp;&nbsp; <span class="fa fa-star-o"></span>&nbsp;&nbsp; <span
+					class="name fullname">Sender</span> <a class=""
+					style="margin-left: 150px">Title</a> <span class="ml-auto p-2">
+
+						<span>Date</span>
+
+				</span>
+
+				</li> <span th:each="messageList : ${messageList}">
+					<li class="list-group-item d-flex justify-content-start">
+
+						<div class="checkbox">
+
+							<input type="checkbox" name="messagIds"
+								th:value="${messageList.id}"></input>
+
+						</div> &nbsp;&nbsp; <span class="" th:classappend="${messageList.starBoolean} ? 'fa fa-star' : 'fa fa-star-o'"></span>&nbsp;&nbsp; <span
+						class="name fullname" th:text="${messageList.sender.email}"></span>
+						<a class=""
+						th:classappend="${messageList.readBoolean} ? '' : boldtext"
+						style="margin-left: 40px"
+						th:text="'Subject :' + ${messageList.messageTitle}"
+						th:href="@{'/readmessage?id=' + ${messageList.id}}"></a> <span
+						class="ml-auto p-2"> <span
+							th:if="${#dates.format(messageList.creationTime, 'dd-MMM-yyyy')} == ${#dates.format(date, 'dd-MMM-yyyy')} "
+							class="badge badge-default badge-pill"
+							th:text="${#dates.format(messageList.creationTime, 'HH:mm')}"></span>
+							<span
+							th:if="${#dates.format(messageList.creationTime, 'dd-MMM-yyyy')} != ${#dates.format(date, 'dd-MMM-yyyy')} "
+							class="badge badge-default badge-pill"
+							th:text="${#dates.format(messageList.creationTime, 'dd-MMM-yyyy')}"></span>
+					</span>
+
+				</li>
+				</span>
+			</div>
+		</form>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/loginpage.css" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+
+	<div class="container" th:fragment="editaddress">
+
+		<div class="row" style="padding-top: 2cm;">
+
+			<form method="post" th:action="@{/editaddress}"
+				th:object="${address}">
+				<input type="hidden" th:field="*{id}" /> <input class="input"
+					type="text" name="Country" placeholder="Country"
+					required="required" th:field="*{country}" /> <select
+					class="custom-select input" th:field="*{city}">
+					<option selected="selected" value="0">Select city ( none )</option>
+					<option th:each="city : ${city}" th:text="${city.getName()}"
+						th:value="${city}"></option>
+				</select> <input class="input" type="text" name="u" placeholder="Street"
+					required="required" th:field="*{street}" /> <input class="input"
+					type="text" name="u" placeholder="Number" required="required"
+					th:field="*{number}" />
+
+
+				<button type="submit" class="btn btn-primary btn-block btn-large">Save</button>
+
+			</form>
+
+		</div>
+		<script th:fragment="js" src="js/check.js" rel="stylesheet"></script>
+	</div>
+</body>
+</html>

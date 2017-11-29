@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title></title>
+<link th:fragment="css" href="css/login.css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+
+	<div class="container" th:fragment="showad">
+	<div class="input">
+	<div class="row">
+	
+	<h1 class="mx-auto" th:text="${advertisement.title}"></h1>
+	
+	</div>
+	<div class="row">
+	
+	<div class="col-lg-3 hidden-md-down">
+			<img th:src="${advertisement.picturePath} ? ${#strings.substringAfter(#strings.replace(advertisement.picturePath,'\','/'), 'static')} : '/images/no-thumb.jpg'" width="auto	" height="150px" alt="Lorem ipsum" ></img>
+	
+	</div>
+	
+	<ul class="meta-search ">
+				<li><i class="glyphicon glyphicon-calendar" th:text="'Date posted : ' + ${#dates.format(advertisement.creationTime, 'dd-MMM-yyyy')}"></i></li>
+				<li><i class="glyphicon glyphicon-time" th:text="'Category : ' + ${advertisement.adType}"></i></li>
+				<li><i class="glyphicon glyphicon-time" th:text="'Sub category : ' + ${advertisement.subCategory.name}"></i></li>
+				<li><i class="glyphicon glyphicon-tags" th:text="'Price ' + ${advertisement.price}"></i><i class="glyphicon glyphicon-tags" th:text="' - ' + ${advertisement.courency.name}"></i></li>
+				<li th:if="${advertisement.adType} == 'Electronics' or ${advertisement.adType} == 'Fashion' or ${advertisement.adType} == 'Gardening'"><i th:text="'Condition : ' + ${advertisement.prodState.name}"></i></li>
+				<li th:if="${advertisement.adType} == 'Auto'"><i th:text="'Brand : ' + ${advertisement.autoBrand.name}"></i></li>
+				<li th:if="${advertisement.adType} == 'Job'"><i th:text="'Job type : ' + ${advertisement.jobType.name}"></i></li>
+				<li th:if="${advertisement.adType} == 'Fashion'"><i th:text="'Brand : ' + ${advertisement.brand}"></i></li>
+				<li th:if="${advertisement.adType} == 'Auto' or ${advertisement.adType} == 'Property'"><i th:text="'Brand : ' + ${advertisement.buildYear}"></i></li>
+				<li th:if="${advertisement.adType} == 'Auto'"><i th:text="'Fuel type : ' + ${advertisement.fuelType.name}"></i></li>
+				<li th:if="${advertisement.adType} == 'Auto'"><i th:text="'Rulaj : ' + ${advertisement.rulaj}"></i></li>
+				<li th:if="${advertisement.adType} == 'Auto' or ${advertisement.adType} == 'Fashion'"><i th:text="'Brand : ' + ${advertisement.color.name}"></i></li>
+	
+	</ul>
+	
+	</div>
+	
+	<div class="row">
+		<h1>&emsp;Desctription : </h1>
+	</div>
+	
+	<div class="row">
+		<p th:text="' &emsp;- &emsp;' + ${advertisement.body}"></p>
+	</div>
+	
+	<div class="row">
+		<hr>
+		
+		<div class="row float-right">
+		
+			<th:block th:switch="${advertisement.owner.email}">
+				<div class="float-right">
+					<a th:case="${loggedUser}"> <a th:href="@{'/editad?id=' + ${advertisement.id}}" class="btn btn-danger ">edit</a> | <a class="btn text-danger" th:href="@{'/deletead?id=' + ${advertisement.id}}">delete</a></a> 
+					<a class="btn btn-danger " th:case="*" th:href="@{'/compose?id=' + ${advertisement.id}}">Send Message</a>
+				</div>
+			</th:block>
+		
+		
+		</div>
+		
+		</hr>
+	
+	
+	</div>
+
+		<hr>
+
+		<footer>
+			<p>&copy; Baraian Tudor Calin 2017</p>
+		</footer>
+		</hr>
+</div>
+	</div>
+
+</body>
+</html>
